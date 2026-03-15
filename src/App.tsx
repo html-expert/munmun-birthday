@@ -357,17 +357,22 @@ export function App() {
                   </div>
                 </div>
               </div>
-              
-<div className="flex justify-center mt-12 relative z-50">
-  <motion.button
-    whileHover={{ scale: 1.08 }}
-    whileTap={{ scale: 0.95 }}
-    onClick={() => nextStage()}
-    className="relative z-50 pointer-events-auto px-16 py-6 rounded-2xl border border-white/30 hover:bg-white/5 flex items-center gap-3 text-lg transition-all cursor-pointer"
-  >
-    CONTINUE TO THE QUIZ <ArrowRight />
-  </motion.button>
-</div>
+      
+      <div className="flex justify-center mt-12 relative z-50">
+        <motion.button
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => nextStage()}
+          className="relative z-50 pointer-events-auto px-16 py-6 rounded-2xl border border-white/30 hover:bg-white/5 flex items-center gap-3 text-lg transition-all cursor-pointer"
+        >
+          CONTINUE TO THE QUIZ <ArrowRight />
+        </motion.button>
+      </div>
+
+    </div>
+  </motion.div>
+)}
+
         {/* STAGE 2: QUIZ */}
         {stage === 2 && (
           <motion.div 
