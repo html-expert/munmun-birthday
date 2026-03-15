@@ -517,34 +517,33 @@ return (
     animate={{ opacity: 1 }}
     className="min-h-screen flex flex-col items-center justify-center text-center p-6 relative z-10"
   >
-            <div className="z-10 max-w-lg">
-              <motion.div
-                animate={{ 
-                  scale: [1, 1.15, 1],
+ <div className="text-[180px] mb-6">💍</div>
+              </motion.div>
+              
+              <h1 className="text-7xl font-serif mb-4 tracking-tighter">I love you</h1>
+              <p className="text-4xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-purple-300 mb-8">to the moon and back</p>
+              
+              <div className="max-w-xs mx-auto text-lg text-white/80 leading-relaxed mb-16">
+                Thank you for making every day better than the last. 
+                Here's to many more birthdays together. 
+                You are my everything.
+              </div>
+              
+              <button 
+                onClick={() => {
+                  launchConfetti(3);
+                  setTimeout(() => launchConfetti(2), 300);
+                  setTimeout(() => launchConfetti(2.5), 700);
                 }}
-                transition={{ duration: 2.8, repeat: Infinity }}
+                className="px-8 py-4 rounded-full border border-pink-400 text-pink-300 text-sm tracking-widest hover:bg-pink-500 hover:text-white transition"
               >
-    <div className="text-[180px] mb-6">💍</div>
-
-    <h1 className="text-7xl mb-4">I love you</h1>
-
-    <p className="text-3xl text-pink-300 mb-10">
-      to the moon and back
-    </p>
-
-    <button
-      onClick={() => launchConfetti(3)}
-      className="relative z-50 cursor-pointer px-8 py-4 border border-pink-400 rounded-full hover:bg-pink-500 hover:text-white"
-    >
-      ONE MORE TIME
-    </button>
-
-    <div className="absolute bottom-8 text-xs text-white/30">
-      ❤️ HAPPY BIRTHDAY MY LOVE ❤️
-    </div>
-
-  </motion.div>
-)}
+                ONE MORE TIME
+              </button>
+            </div>
+            
+            <div className="absolute bottom-8 text-xs text-white/30">❤️ HAPPY BIRTHDAY MY LOVE ❤️</div>
+          </motion.div>
+        )}
       </AnimatePresence>
 
       {/* Progress indicator */}
