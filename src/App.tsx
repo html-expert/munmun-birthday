@@ -539,10 +539,7 @@ return (
 
   </motion.div>
 )}
-</AnimatePresence>
-</div>
-);
-}
+      </AnimatePresence>
 
       {/* Progress indicator */}
       <div className="fixed bottom-8 right-8 flex gap-2 z-50">
