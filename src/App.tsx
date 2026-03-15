@@ -13,7 +13,7 @@ const quizQuestions: QuizQuestion[] = [
   {
     question: "What is my favorite way to surprise you?",
     options: ["Flowers", "Love letters", "Romantic dinners", "All of the above"],
-    correct: 3,
+    correct: 4,
   },
   {
     question: "Our first date was at...",
@@ -373,280 +373,165 @@ export function App() {
   </motion.div>
 )}
 
-        {/* STAGE 2: QUIZ */}
-        {stage === 2 && (
-          <motion.div 
-            key="stage2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="min-h-screen flex items-center justify-center p-6"
-          >
-            <div className="max-w-xl w-full">
-              <div className="text-center mb-12">
-                <div className="inline-flex items-center gap-2 bg-white/5 text-pink-400 text-sm uppercase tracking-[3px] px-6 py-3 rounded-3xl mb-6">
-                  <Star className="h-4 w-4" /> HOW WELL DO YOU THINK I KNOW YOU?
-                </div>
-                <h2 className="text-6xl font-light">The Love Quiz</h2>
-                <p className="text-pink-300 mt-3">Answer these questions about us</p>
-              </div>
+return (
+  <div className="relative min-h-screen overflow-x-hidden">
 
-              {!showResult ? (
-                <div className="bg-zinc-950 border border-white/10 rounded-3xl p-10">
-                  <div className="flex justify-between text-sm mb-8 text-white/60">
-                    <div>QUESTION {currentQuestion + 1} OF {quizQuestions.length}</div>
-                    <div className="text-emerald-400">{quizScore} correct</div>
-                  </div>
-                  
-                  <motion.p 
-                    key={currentQuestion}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="text-3xl leading-tight mb-12 font-light"
+    <AnimatePresence mode="wait">
+
+      {/* STAGE 2: QUIZ */}
+      {stage === 2 && (
+        <motion.div
+          key="stage2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="min-h-screen flex items-center justify-center p-6 relative z-10"
+        >
+          <div className="max-w-xl w-full">
+
+            <div className="text-center mb-12">
+              <h2 className="text-6xl font-light">The Love Quiz</h2>
+              <p className="text-pink-300 mt-3">
+                Answer these questions about us
+              </p>
+            </div>
+
+            <div className="bg-zinc-950 border border-white/10 rounded-3xl p-10">
+
+              <motion.p
+                key={currentQuestion}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-3xl mb-12 font-light"
+              >
+                {quizQuestions[currentQuestion].question}
+              </motion.p>
+
+              <div className="grid gap-4">
+
+                {quizQuestions[currentQuestion].options.map((option, idx) => (
+
+                  <button
+                    key={idx}
+                    onClick={() => handleQuizAnswer(idx)}
+                    className="relative z-20 cursor-pointer p-6 text-left rounded-2xl border border-white/10 hover:border-white/30 hover:bg-white/5 flex items-center justify-between"
                   >
-                    {quizQuestions[currentQuestion].question}
-                  </motion.p>
-                  
-                  <div className="grid gap-4">
-                    {quizQuestions[currentQuestion].options.map((option, idx) => (
-                      <motion.button
-                        key={idx}
-                        whileHover={{ scale: 1.02, x: 6 }}
-                        onClick={() => handleQuizAnswer(idx)}
-                        className={`group p-6 text-left rounded-2xl border transition-all text-lg flex items-center justify-between
-                          ${selectedAnswer === idx 
-                            ? (idx === quizQuestions[currentQuestion].correct ? 'border-emerald-400 bg-emerald-900/30' : 'border-red-400 bg-red-900/30') 
-                            : 'border-white/10 hover:border-white/30 hover:bg-white/5'}`}
-                      >
-                        <span>{option}</span>
-                        <div className="text-xs px-3 py-1 rounded-full bg-white/10 text-white/50 group-hover:bg-pink-500/20 transition">
-                          SELECT
-                        </div>
-                      </motion.button>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <motion.div 
-                  initial={{ scale: 0.9, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  className="bg-zinc-950 border border-white/10 rounded-3xl p-16 text-center"
-                >
-                  <div className="text-7xl mb-6">🎉</div>
-                  <h3 className="text-5xl font-light mb-3">You got {quizScore} out of {quizQuestions.length}</h3>
-                  <p className="text-xl text-pink-400 mb-10">Amazing! You really know me {quizScore > 2 ? 'so well ❤️' : 'pretty well'}</p>
-                  
-                  <div className="flex gap-4 justify-center">
-                    <button
-                      onClick={resetQuiz}
-                      className="px-10 py-4 border border-white/30 hover:bg-white/5 rounded-2xl"
-                    >
-                      Try Again
-                    </button>
-                    <button
-                      onClick={nextStage}
-                      className="px-10 py-4 bg-white text-black rounded-2xl hover:bg-pink-200 flex items-center gap-2"
-                    >
-                      NEXT SURPRISE <Gift className="h-4 w-4" />
-                    </button>
-                  </div>
-                </motion.div>
-              )}
-            </div>
-          </motion.div>
-        )}
+                    <span>{option}</span>
+                    <span className="text-xs text-white/50">SELECT</span>
+                  </button>
 
-        {/* STAGE 3: MEMORY GAME */}
-        {stage === 3 && (
-          <motion.div 
-            key="stage3" 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="min-h-screen py-24 px-6"
-          >
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <div className="mx-auto w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center mb-6">
-                  <Heart className="h-9 w-9" />
-                </div>
-                <h2 className="text-6xl font-light tracking-tighter mb-3">Memory Lane</h2>
-                <p className="text-pink-300 max-w-xs mx-auto">Match the symbols that represent our beautiful memories together</p>
+                ))}
+
               </div>
 
-               <div className="grid grid-cols-4 gap-4 max-w-[560px] mx-auto">
-                 {memoryBoard.map((symbol, index) => (
-                   <motion.div
-                     key={index}
-                     onClick={() => handleCardClick(index)}
-                     whileHover={{ scale: 1.04 }}
-                     whileTap={{ scale: 0.92 }}
-                     className={`aspect-square rounded-3xl flex items-center justify-center text-6xl cursor-pointer border-2 transition-all duration-300 shadow-inner select-none
-                       ${(flippedCards.includes(index) || matchedIndices.includes(index))
-                         ? 'bg-zinc-900 border-pink-400 shadow-pink-500/30' 
-                         : 'bg-zinc-950 border-white/10 hover:border-pink-400/40 active:scale-95'}`}
-                   >
-                     {(flippedCards.includes(index) || matchedIndices.includes(index)) ? (
-                       <span className="drop-shadow-md transition-all">{symbol}</span>
-                     ) : (
-                       <div className="w-9 h-9 rounded-full bg-gradient-to-br from-white/10 to-transparent" />
-                     )}
-                   </motion.div>
-                 ))}
-               </div>
-
-               <div className="text-center mt-16">
-                 <div className="inline-flex items-center gap-2 text-sm text-white/50">
-                   MATCHES FOUND: <span className="text-pink-400 font-mono text-xl">{matchedIndices.length / 2}</span>/8
-                 </div>
-                 
-                 {matchedIndices.length === 16 && (
-                   <motion.div 
-                     initial={{ opacity: 0, y: 10 }}
-                     animate={{ opacity: 1, y: 0 }}
-                     className="mt-6 text-emerald-400 font-medium flex items-center justify-center gap-2"
-                   >
-                     ✨ You completed the game! Amazing memory ❤️ ✨
-                   </motion.div>
-                 )}
-               </div>
-
-              <div className="flex justify-center mt-16">
-                <button 
-                  onClick={nextStage}
-                  className="px-12 py-5 bg-gradient-to-r from-pink-500 to-purple-500 rounded-3xl text-lg flex items-center gap-3 hover:brightness-110 transition"
-                >
-                  BLOW OUT THE CANDLES <Cake className="h-5 w-5" />
-                </button>
-              </div>
             </div>
-          </motion.div>
-        )}
 
-        {/* STAGE 4: CAKE */}
-        {stage === 4 && (
-          <motion.div
-            key="stage4"
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="min-h-screen flex items-center justify-center p-6 relative"
-          >
-            <div className="text-center">
-              <motion.div 
-                animate={{ rotate: [0, 3, -3, 0] }}
-                transition={{ duration: 2.5, repeat: Infinity }}
-                className="mx-auto mb-8 relative"
-              >
-                <div className="relative w-80 h-80 mx-auto">
-                  {/* Cake */}
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-72 h-64 bg-gradient-to-b from-pink-300 via-rose-400 to-pink-600 rounded-[4rem] shadow-2xl"></div>
-                  
-                  {/* Cake layers */}
-                  <div className="absolute bottom-[92px] left-1/2 -translate-x-1/2 w-[260px] h-5 bg-gradient-to-r from-pink-700 to-rose-700 rounded"></div>
-                  <div className="absolute bottom-[132px] left-1/2 -translate-x-1/2 w-[260px] h-5 bg-gradient-to-r from-pink-700 to-rose-700 rounded"></div>
-                  
-                  {/* Frosting details */}
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[278px] h-[72px] bg-white/30 rounded-t-[6rem]"></div>
-                  
-                  {/* Candles with better click areas */}
-                  {cakeCandles.map((isLit, i) => (
-                    <motion.div 
-                      key={i}
-                      onClick={() => blowCandles(i)}
-                      whileHover={{ scale: 1.15, y: -8 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="absolute cursor-pointer group"
-                      style={{
-                        left: `${22 + i * 14.5}%`,
-                        top: '68px'
-                      }}
-                    >
-                      {/* Larger invisible click target */}
-                      <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-24 -z-10" />
-                      
-                      {/* Candle */}
-                      <div className={`relative w-5 h-16 bg-gradient-to-t from-amber-800 via-amber-700 to-amber-100 rounded-sm shadow-md transition-all duration-200 ${isLit ? 'animate-flicker' : 'grayscale'}`}>
-                        {/* Wick */}
-                        <div className={`absolute -top-1 left-1/2 w-0.5 h-3 bg-amber-900 -translate-x-1/2 ${isLit ? '' : 'hidden'}`}></div>
-                        
-                        {/* Flame */}
-                        {isLit && (
-                          <motion.div 
-                            animate={{ 
-                              scale: [1, 1.15, 1],
-                              opacity: [1, 0.85, 1]
-                            }}
-                            transition={{ duration: 0.2, repeat: Infinity }}
-                            className="absolute -top-7 left-1/2 -translate-x-1/2 text-3xl drop-shadow-[0_0_12px_#ffeb3b]"
-                          >
-                            🔥
-                          </motion.div>
-                        )}
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
+          </div>
+        </motion.div>
+      )}
 
-              <h3 className="text-5xl font-light mb-6">Make a wish, my love...</h3>
-              <p className="text-pink-400 max-w-xs mx-auto">Click each candle to blow them out. Make your wish as you do.</p>
-              
-              {cakeCandles.every(c => !c) && (
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="mt-12"
+
+      {/* STAGE 3: MEMORY GAME */}
+      {stage === 3 && (
+        <motion.div
+          key="stage3"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="min-h-screen py-24 px-6 relative z-10"
+        >
+          <div className="max-w-4xl mx-auto">
+
+            <h2 className="text-6xl text-center mb-12 font-light">
+              Memory Lane
+            </h2>
+
+            <div className="grid grid-cols-4 gap-4 max-w-[560px] mx-auto">
+
+              {memoryBoard.map((symbol, index) => (
+
+                <div
+                  key={index}
+                  onClick={() => handleCardClick(index)}
+                  className="relative z-20 aspect-square rounded-3xl flex items-center justify-center text-6xl cursor-pointer border border-white/10 hover:border-pink-400"
                 >
-                  <div className="text-4xl mb-4">✨</div>
-                  <p className="text-2xl text-emerald-400">WISH GRANTED! I LOVE YOU MORE THAN WORDS CAN SAY</p>
-                </motion.div>
-              )}
 
-              <button 
+                  {(flippedCards.includes(index) ||
+                    matchedIndices.includes(index))
+                    ? symbol
+                    : "?"}
+
+                </div>
+
+              ))}
+
+            </div>
+
+            <div className="flex justify-center mt-16">
+
+              <button
                 onClick={nextStage}
-                className="mt-20 px-14 py-6 border-2 border-white/60 rounded-3xl text-lg hover:bg-white hover:text-black transition-all flex items-center gap-3 mx-auto"
+                className="relative z-50 cursor-pointer px-12 py-5 bg-gradient-to-r from-pink-500 to-purple-500 rounded-3xl text-lg hover:brightness-110"
               >
-                SEE YOUR FINAL GIFT
+                BLOW OUT THE CANDLES
               </button>
-            </div>
-          </motion.div>
-        )}
 
-        {/* STAGE 5: FINAL SURPRISE */}
-        {stage === 5 && (
-          <motion.div 
-            key="stage5"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="min-h-screen flex flex-col items-center justify-center p-6 text-center relative overflow-hidden"
+            </div>
+
+          </div>
+        </motion.div>
+      )}
+
+
+      {/* STAGE 4: CAKE */}
+      {stage === 4 && (
+        <motion.div
+          key="stage4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="min-h-screen flex items-center justify-center p-6 relative z-10"
+        >
+          <div className="text-center">
+
+            <div className="text-[160px] mb-6">🎂</div>
+
+            <h3 className="text-5xl font-light mb-6">
+              Make a wish, my love...
+            </h3>
+
+            <button
+              onClick={nextStage}
+              className="relative z-50 cursor-pointer mt-20 px-14 py-6 border-2 border-white/60 rounded-3xl hover:bg-white hover:text-black transition"
+            >
+              SEE YOUR FINAL GIFT
+            </button>
+
+          </div>
+        </motion.div>
+      )}
+
+
+      {/* STAGE 5: FINAL */}
+      {stage === 5 && (
+        <motion.div
+          key="stage5"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="min-h-screen flex flex-col items-center justify-center text-center p-6 relative z-10"
+        >
+
+          <div className="text-[180px] mb-6">💍</div>
+
+          <h1 className="text-7xl mb-4">I love you</h1>
+
+          <p className="text-3xl text-pink-300 mb-10">
+            to the moon and back
+          </p>
+
+          <button
+            onClick={() => launchConfetti(3)}
+            className="relative z-50 cursor-pointer px-8 py-4 border border-pink-400 rounded-full hover:bg-pink-500 hover:text-white"
           >
-            <div className="z-10 max-w-lg">
-              <motion.div
-                animate={{ 
-                  scale: [1, 1.15, 1],
-                }}
-                transition={{ duration: 2.8, repeat: Infinity }}
-              >
-                <div className="text-[180px] mb-6">💍</div>
-              </motion.div>
-              
-              <h1 className="text-7xl font-serif mb-4 tracking-tighter">I love you</h1>
-              <p className="text-4xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 to-purple-300 mb-8">to the moon and back</p>
-              
-              <div className="max-w-xs mx-auto text-lg text-white/80 leading-relaxed mb-16">
-                Thank you for making every day better than the last. 
-                Here's to many more birthdays together. 
-                You are my everything.
-              </div>
-              
-              <button 
-                onClick={() => {
-                  launchConfetti(3);
-                  setTimeout(() => launchConfetti(2), 300);
-                  setTimeout(() => launchConfetti(2.5), 700);
-                }}
-                className="px-8 py-4 rounded-full border border-pink-400 text-pink-300 text-sm tracking-widest hover:bg-pink-500 hover:text-white transition"
-              >
-                ONE MORE TIME
-              </button>
+            ONE MORE TIME
+ </button>
             </div>
             
             <div className="absolute bottom-8 text-xs text-white/30">❤️ HAPPY BIRTHDAY MY LOVE ❤️</div>
