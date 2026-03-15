@@ -100,17 +100,17 @@ export function App() {
     </div>
   );
 
-  // Play romantic music (using a free sound url or simulate)
-  useEffect(() => {
-    const audioElement = new (window.Audio as any)('https://soundcloud.com/pamma4355/good-luck-charm-ks-makhan.mp3');
-    audioElement.loop = true;
-    audioElement.volume = 0.3;
-    setAudio(audioElement);
+useEffect(() => {
+  const audioElement = new Audio('/romantic-background.mp3');
+  audioElement.loop = true;
+  audioElement.volume = 0.3;
 
-    return () => {
-      if (audioElement) audioElement.pause();
-    };
-  }, []);
+  setAudio(audioElement);
+
+  return () => {
+    audioElement.pause();
+  };
+}, []);
 
   const toggleMusic = () => {
     if (!audio) return;
