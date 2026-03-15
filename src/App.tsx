@@ -517,7 +517,13 @@ return (
     animate={{ opacity: 1 }}
     className="min-h-screen flex flex-col items-center justify-center text-center p-6 relative z-10"
   >
-
+            <div className="z-10 max-w-lg">
+              <motion.div
+                animate={{ 
+                  scale: [1, 1.15, 1],
+                }}
+                transition={{ duration: 2.8, repeat: Infinity }}
+              >
     <div className="text-[180px] mb-6">💍</div>
 
     <h1 className="text-7xl mb-4">I love you</h1>
