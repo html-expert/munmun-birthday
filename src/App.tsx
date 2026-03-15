@@ -509,35 +509,37 @@ return (
       )}
 
 
-      {/* STAGE 5: FINAL */}
-      {stage === 5 && (
-        <motion.div
-          key="stage5"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="min-h-screen flex flex-col items-center justify-center text-center p-6 relative z-10"
-        >
+{/* STAGE 5: FINAL */}
+{stage === 5 && (
+  <motion.div
+    key="stage5"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    className="min-h-screen flex flex-col items-center justify-center text-center p-6 relative z-10"
+  >
 
-          <div className="text-[180px] mb-6">💍</div>
+    <div className="text-[180px] mb-6">💍</div>
 
-          <h1 className="text-7xl mb-4">I love you</h1>
+    <h1 className="text-7xl mb-4">I love you</h1>
 
-          <p className="text-3xl text-pink-300 mb-10">
-            to the moon and back
-          </p>
+    <p className="text-3xl text-pink-300 mb-10">
+      to the moon and back
+    </p>
 
-          <button
-            onClick={() => launchConfetti(3)}
-            className="relative z-50 cursor-pointer px-8 py-4 border border-pink-400 rounded-full hover:bg-pink-500 hover:text-white"
-          >
-            ONE MORE TIME
- </button>
-            </div>
-            
-            <div className="absolute bottom-8 text-xs text-white/30">❤️ HAPPY BIRTHDAY MY LOVE ❤️</div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+    <button
+      onClick={() => launchConfetti(3)}
+      className="relative z-50 cursor-pointer px-8 py-4 border border-pink-400 rounded-full hover:bg-pink-500 hover:text-white"
+    >
+      ONE MORE TIME
+    </button>
+
+    <div className="absolute bottom-8 text-xs text-white/30">
+      ❤️ HAPPY BIRTHDAY MY LOVE ❤️
+    </div>
+
+  </motion.div>
+)}
+</AnimatePresence>
 
       {/* Progress indicator */}
       <div className="fixed bottom-8 right-8 flex gap-2 z-50">
