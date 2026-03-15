@@ -102,7 +102,7 @@ export function App() {
 
   // Play romantic music (using a free sound url or simulate)
   useEffect(() => {
-    const audioElement = new (window.Audio as any)('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+    const audioElement = new (window.Audio as any)('https://soundcloud.com/pamma4355/good-luck-charm-ks-makhan.mp3');
     audioElement.loop = true;
     audioElement.volume = 0.3;
     setAudio(audioElement);
