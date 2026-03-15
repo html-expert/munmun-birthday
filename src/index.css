@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.animate-flicker {
+  animation: flicker 0.15s infinite alternate;
+}
+
+body {
+  font-feature-settings: "kern";
+}
